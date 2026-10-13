@@ -1,0 +1,15 @@
+## Bài 1: Xử lý Log máy chủ dung lượng lớn
+### Phần 1: Phân tích
+* **Vì sao Notepad bị "Not Responding":** Notepad là ứng dụng GUI cố gắng đọc và nạp **toàn bộ tệp (800MB)** vào RAM cùng một lúc. Việc này gây tiêu tốn bộ nhớ quá mức và nghẽn luồng xử lý giao diện.
+
+* **Vì sao lệnh `cat` báo lỗi trong CMD:** `cat` là lệnh của hệ điều hành Linux/Unix, **không tồn tại** sẵn trong môi trường Windows CMD truyền thống nên bị báo lỗi `"command not found"`.
+
+* **Tại sao `cat` hoạt động trong PowerShell:** Trên PowerShell, `cat` được định nghĩa là **bí danh (alias)** trỏ đến cmdlet nội dựng `Get-Content`.
+
+### Phần 2: Hoàn thiện (Bộ lệnh PowerShell)
+1. **Xem toàn bộ nội dung tệp:**
+Get-Content -Path .\\server\_log\_800MB.log
+*(Hoặc dùng alias: `cat .\\server\_log\_800MB.log`)*
+
+2. **Chỉ xem 10 dòng cuối cùng:**
+Get-Content -Path .\\server\_log\_800MB.log -Tail 10
